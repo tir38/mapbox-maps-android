@@ -14,6 +14,7 @@ import com.mapbox.maps.MapView
 import com.mapbox.maps.Style
 import com.mapbox.maps.extension.style.expressions.dsl.generated.interpolate
 import com.mapbox.maps.plugin.LocationPuck2D
+import com.mapbox.maps.plugin.compass.compass
 import com.mapbox.maps.plugin.gestures.OnMoveListener
 import com.mapbox.maps.plugin.gestures.gestures
 import com.mapbox.maps.plugin.locationcomponent.OnIndicatorBearingChangedListener
@@ -73,6 +74,9 @@ class LocationTrackingActivity : AppCompatActivity() {
     mapView.getMapboxMap().loadStyleUri(
       Style.MAPBOX_STREETS
     ) {
+      // move compass onto screen
+      mapView.compass.marginTop = 200f
+      mapView.compass.marginRight = 200f
       initLocationComponent()
       setupGesturesListener()
     }
