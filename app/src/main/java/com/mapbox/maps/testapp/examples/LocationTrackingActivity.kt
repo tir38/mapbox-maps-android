@@ -147,8 +147,9 @@ class LocationTrackingActivity : AppCompatActivity() {
   private fun doWorkToMakeFullScreen() {
     WindowCompat.setDecorFitsSystemWindows(window, false)
     window.apply {
-      statusBarColor = Color.TRANSPARENT
-      navigationBarColor = Color.TRANSPARENT
+      // changing this to non-transparent solves the issue.
+      statusBarColor = Color.GREEN
+      navigationBarColor = Color.GREEN
     }
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
       window.attributes.layoutInDisplayCutoutMode =
