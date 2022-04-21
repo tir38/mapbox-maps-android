@@ -1,9 +1,13 @@
 package com.mapbox.maps.testapp.examples
 
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.WindowCompat
 import com.mapbox.android.gestures.MoveGestureDetector
 import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.MapView
@@ -56,6 +60,8 @@ class LocationTrackingActivity : AppCompatActivity() {
     locationPermissionHelper.checkPermissions {
       onMapReady()
     }
+
+    doWorkToMakeFullScreen()
   }
 
   private fun onMapReady() {
@@ -132,5 +138,17 @@ class LocationTrackingActivity : AppCompatActivity() {
   ) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     locationPermissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults)
+  }
+
+  private fun doWorkToMakeFullScreen() {
+    WindowCompat.setDecorFitsSystemWindows(window, false)
+    window.apply {
+      statusBarColor = Color.TRANSPARENT
+      navigationBarColor = Color.TRANSPARENT
+    }
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+      window.attributes.layoutInDisplayCutoutMode =
+        WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+    }
   }
 }
